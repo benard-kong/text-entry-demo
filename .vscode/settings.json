@@ -1,6 +1,6 @@
 {
   "TodoParser": {
-    "folderExclude": ["node_modules", ".vscode", "build", "release"],
+    "folderExclude": ["node_modules", ".vscode", "build", "release", ".vscode"],
     "markers": ["NOTICE:", "INFO:", "HOTFIX:", "FIXME:"]
   },
   "[html]": {
