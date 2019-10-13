@@ -1,0 +1,90 @@
+.text-entry {
+  & {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  &__label {
+    color: $color-primary;
+    font-size: 1.6rem;
+    margin-bottom: 1px;
+
+    &--disabled {
+      color: $color-grey-1;
+    }
+  }
+
+  &__input-container {
+    display: flex;
+  }
+
+  &__image-container {
+    align-items: center;
+    border: 1px solid $color-grey-1;
+    border-right: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: flex;
+    justify-content: center;
+    padding: 0 2.3rem;
+
+    &--active {
+      border-color: $color-secondary;
+    }
+
+    &--error {
+      border-color: $color-error;
+    }
+  }
+
+  &__input {
+    border: 1px solid $color-grey-1;
+    border-radius: 0;
+    color: $color-black;
+    flex: 1;
+    font-size: 2rem;
+    outline: 0;
+    padding: 1.2rem 1.4rem;
+
+    &--active {
+      border-color: $color-secondary;
+    }
+
+    &--disabled {
+      background-color: $color-grey-light;
+    }
+
+    &--error {
+      border-color: $color-error;
+    }
+  }
+
+  &__signup {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+  }
+
+  &__help-text {
+    color: $color-grey-2;
+    font-size: 1.2rem;
+    margin-top: 0.7rem;
+
+    &--disabled {
+      color: $color-grey-1;
+    }
+
+    &--error {
+      border-top: 5px;
+      color: $color-error;
+      font-size: 1.4rem;
+    }
+  }
+
+  & .fa-user {
+    font-size: 1.6rem;
+    color: $color-grey-2;
+  }
+}
