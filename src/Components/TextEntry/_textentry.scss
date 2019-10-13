@@ -19,7 +19,7 @@
     display: flex;
   }
 
-  &__image-container {
+  &__icon-container {
     align-items: center;
     border: 1px solid $color-grey-1;
     border-right: 0;
@@ -36,6 +36,10 @@
     &--error {
       border-color: $color-error;
     }
+
+    &--disabled {
+      border-color: $color-grey-1;
+    }
   }
 
   &__input {
@@ -51,12 +55,13 @@
       border-color: $color-secondary;
     }
 
-    &--disabled {
-      background-color: $color-grey-light;
-    }
-
     &--error {
       border-color: $color-error;
+    }
+
+    &--disabled {
+      background-color: $color-grey-light;
+      border-color: $color-grey-1;
     }
   }
 
