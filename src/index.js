@@ -4,6 +4,7 @@ import 'normalize.css'
 import './scss/styles.scss'
 import { TextEntry } from './Components/TextEntry/TextEntry'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
+import { emailHasError } from './utils/email-checker'
 
 ReactDOM.render(
   <div>
@@ -14,7 +15,6 @@ ReactDOM.render(
       placeholder="some text"
       isSignup={false}
       isDisabled={false}
-      hasError={false}
     />
     <TextEntry
       label="Disabled"
@@ -22,7 +22,6 @@ ReactDOM.render(
       placeholder="some text"
       isSignup={false}
       isDisabled={true}
-      hasError={false}
     />
     <TextEntry
       label="Error"
@@ -30,7 +29,6 @@ ReactDOM.render(
       placeholder="some text"
       isSignup={false}
       isDisabled={false}
-      hasError={true}
     />
     <h1>Signup Forms</h1>
     <TextEntry
@@ -40,7 +38,7 @@ ReactDOM.render(
       icon={faUser}
       isSignup={true}
       isDisabled={false}
-      hasError={false}
+      checkError={emailHasError}
     />
     <TextEntry
       label="Disabled"
@@ -49,7 +47,6 @@ ReactDOM.render(
       icon={faUser}
       isSignup={true}
       isDisabled={true}
-      hasError={false}
     />
     <TextEntry
       label="Error"
@@ -58,7 +55,6 @@ ReactDOM.render(
       icon={faUser}
       isSignup={true}
       isDisabled={false}
-      hasError={true}
     />
   </div>,
   document.getElementById('root')

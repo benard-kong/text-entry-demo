@@ -11,16 +11,28 @@ export class TextEntry extends React.Component {
 
     this.state = {
       isFocused: false,
+      hasError: false,
+      errorHelpText: '',
     }
   }
 
-  handleBlur = () => this.setState({ isFocused: false })
+  handleBlur = (e) => {
+    this.setState({ isFocused: false })
+    const input = e.target.value
+    const { checkError } = this.props
+    if (typeof checkError === 'function') {
+      const { hasError, helpText: errorHelpText } = checkError(input)
+      this.setState({ hasError, errorHelpText })
+    }
+  }
 
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { label, helpText, placeholder, isSignup, icon, isDisabled, hasError } = this.props
-    const { isFocused } = this.state
+    const { label, placeholder, isSignup, icon, isDisabled } = this.props
+    const { isFocused, hasError, errorHelpText } = this.state
+    let { helpText } = this.props
+    if (hasError) helpText = errorHelpText
     const inputClassName = classNames({
       'text-entry__input': true,
       'text-entry__signup': isSignup,
@@ -84,5 +96,5 @@ TextEntry.propTypes = {
     } // TODO: Now icon is not required to be oneOf([faUser])
   },
   isDisabled: PropTypes.bool.isRequired,
-  hasError: PropTypes.bool.isRequired, // If isDisabled is true, this must be false
+  checkError: PropTypes.func,
 }
