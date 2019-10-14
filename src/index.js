@@ -9,35 +9,17 @@ import { emailHasError } from './utils/email-checker'
 ReactDOM.render(
   <div>
     <h1>General Forms</h1>
-    <TextEntry
-      label="Normal"
-      helpText="Help Text (if necessary)"
-      placeholder="some text"
-      isSignup={false}
-      isDisabled={false}
-    />
-    <TextEntry
-      label="Disabled"
-      helpText="Help Text (if necessary)"
-      placeholder="some text"
-      isSignup={false}
-      isDisabled={true}
-    />
-    <TextEntry
-      label="Error"
-      helpText="Help Text (if necessary)"
-      placeholder="some text"
-      isSignup={false}
-      isDisabled={false}
-    />
+    <TextEntry label="Normal" helpText="Help Text (if necessary)" placeholder="some text" />
+    <TextEntry label="Disabled" helpText="Help Text (if necessary)" placeholder="some text" isDisabled={true} />
+    <TextEntry label="Error" helpText="Help Text (if necessary)" placeholder="some text" />
+
     <h1>Signup Forms</h1>
     <TextEntry
-      label="Normal"
-      helpText="Help Text (if necessary)"
+      label="Email"
+      helpText="eg. john-smith@abc.com"
       placeholder="some text"
       icon={faUser}
       isSignup={true}
-      isDisabled={false}
       checkError={emailHasError}
     />
     <TextEntry
@@ -54,7 +36,6 @@ ReactDOM.render(
       placeholder="some text"
       icon={faUser}
       isSignup={true}
-      isDisabled={false}
     />
   </div>,
   document.getElementById('root')

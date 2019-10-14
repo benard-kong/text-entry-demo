@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-regular-svg-icons'
+// import { faUser } from '@fortawesome/free-regular-svg-icons'
 // import { IconDefinition } from '@fortawesome/fontawesome-svg-core/index.d.ts'
 import classNames from 'classnames'
 
@@ -18,9 +18,9 @@ export class TextEntry extends React.Component {
 
   handleBlur = (e) => {
     this.setState({ isFocused: false })
-    const input = e.target.value
     const { checkError } = this.props
     if (typeof checkError === 'function') {
+      const input = e.target.value
       const { hasError, helpText: errorHelpText } = checkError(input)
       this.setState({ hasError, errorHelpText })
     }
@@ -83,18 +83,23 @@ export class TextEntry extends React.Component {
 TextEntry.propTypes = {
   label: PropTypes.string,
   helpText: PropTypes.string,
-  // icon: PropTypes.instanceOf(IconDefinition),
   placeholder: PropTypes.string,
-  isSignup: PropTypes.bool.isRequired,
+  isSignup: PropTypes.bool,
+  // icon: PropTypes.instanceOf(IconDefinition),
   // icon: PropTypes.oneOf([faUser]),
   icon: (props, propName) => {
     if (props.isSignup && props[propName] === undefined) {
-      console.log('typeof(props[propName]): ', typeof props[propName] != 'function')
       return new Error('Please provide an icon prop!')
     } else if (!props.isSignup && props[propName] !== undefined) {
       return new Error('Do not provide an icon prop if isSignup is false!')
     } // TODO: Now icon is not required to be oneOf([faUser])
   },
-  isDisabled: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool,
   checkError: PropTypes.func,
+}
+
+TextEntry.defaultProps = {
+  isSignup: false,
+  isDisabled: false,
+  checkError: () => false,
 }
