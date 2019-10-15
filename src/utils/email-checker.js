@@ -12,7 +12,7 @@ export const emailHasError = (input) => {
   } else {
     return {
       hasError: true,
-      helpText: 'Please input a valid email address',
+      errorHelpText: 'Please input a valid email address',
     }
   }
 }
