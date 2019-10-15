@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-regular-svg-icons'
 import classNames from 'classnames'
 
 export class TextEntry extends React.Component {
@@ -11,7 +10,7 @@ export class TextEntry extends React.Component {
     this.state = {
       isFocused: false,
       hasError: false,
-      errorHelpText: '',
+      errorHelpText: undefined,
     }
   }
 
@@ -20,7 +19,7 @@ export class TextEntry extends React.Component {
     const { checkError } = this.props
     if (typeof checkError === 'function') {
       const input = e.target.value
-      const { hasError, helpText: errorHelpText } = checkError(input)
+      const { hasError, errorHelpText } = checkError(input)
       this.setState({ hasError, errorHelpText })
     }
   }
@@ -31,10 +30,10 @@ export class TextEntry extends React.Component {
     const { label, placeholder, icon, isDisabled } = this.props
     const { isFocused, hasError, errorHelpText } = this.state
     let { helpText } = this.props
-    if (hasError) helpText = errorHelpText
+    if (hasError && errorHelpText) helpText = errorHelpText
     const inputClassName = classNames({
       'text-entry__input': true,
-      'text-entry__signup': !!!icon,
+      'text-entry__signup': !icon,
       'text-entry__input--active': isFocused,
       'text-entry__input--error': hasError,
       'text-entry__input--disabled': isDisabled,
@@ -56,7 +55,7 @@ export class TextEntry extends React.Component {
     })
 
     return (
-      <div className="text-entry">
+      <div data-testid="component-wrapper" className="text-entry">
         {label && <h3 className={labelClassName}>{label}</h3>}
         <div className="text-entry__input-container">
           {icon && (
@@ -94,5 +93,5 @@ TextEntry.propTypes = {
 
 TextEntry.defaultProps = {
   isDisabled: false,
-  checkError: () => false,
+  checkError: () => ({ hasError: false }),
 }
