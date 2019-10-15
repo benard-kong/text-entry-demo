@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faUser } from '@fortawesome/free-regular-svg-icons'
-// import { IconDefinition } from '@fortawesome/fontawesome-svg-core/index.d.ts'
+import { faUser } from '@fortawesome/free-regular-svg-icons'
 import classNames from 'classnames'
 
 export class TextEntry extends React.Component {
@@ -29,13 +28,13 @@ export class TextEntry extends React.Component {
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { label, placeholder, isSignup, icon, isDisabled } = this.props
+    const { label, placeholder, icon, isDisabled } = this.props
     const { isFocused, hasError, errorHelpText } = this.state
     let { helpText } = this.props
     if (hasError) helpText = errorHelpText
     const inputClassName = classNames({
       'text-entry__input': true,
-      'text-entry__signup': isSignup,
+      'text-entry__signup': !!!icon,
       'text-entry__input--active': isFocused,
       'text-entry__input--error': hasError,
       'text-entry__input--disabled': isDisabled,
@@ -60,7 +59,7 @@ export class TextEntry extends React.Component {
       <div className="text-entry">
         {label && <h3 className={labelClassName}>{label}</h3>}
         <div className="text-entry__input-container">
-          {isSignup && (
+          {icon && (
             <div className={iconClassName}>
               <FontAwesomeIcon icon={icon} />
             </div>
@@ -84,22 +83,16 @@ TextEntry.propTypes = {
   label: PropTypes.string,
   helpText: PropTypes.string,
   placeholder: PropTypes.string,
-  isSignup: PropTypes.bool,
-  // icon: PropTypes.instanceOf(IconDefinition),
-  // icon: PropTypes.oneOf([faUser]),
-  icon: (props, propName) => {
-    if (props.isSignup && props[propName] === undefined) {
-      return new Error('Please provide an icon prop!')
-    } else if (!props.isSignup && props[propName] !== undefined) {
-      return new Error('Do not provide an icon prop if isSignup is false!')
-    } // TODO: Now icon is not required to be oneOf([faUser])
-  },
+  icon: PropTypes.exact({
+    prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
+    iconName: PropTypes.string,
+    icon: PropTypes.array,
+  }),
   isDisabled: PropTypes.bool,
   checkError: PropTypes.func,
 }
 
 TextEntry.defaultProps = {
-  isSignup: false,
   isDisabled: false,
   checkError: () => false,
 }
