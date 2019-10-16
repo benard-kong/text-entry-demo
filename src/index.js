@@ -4,14 +4,19 @@ import 'normalize.css'
 import './scss/styles.scss'
 import { TextEntry } from './Components/TextEntry/TextEntry'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { emailHasError } from './utils/email-checker'
 
 ReactDOM.render(
   <div>
     <h1>General Forms</h1>
-    <TextEntry label="Normal" helpText="Help Text (if necessary)" placeholder="some text" />
+    <TextEntry label="Normal" helpText="" placeholder="some text" />
+    <TextEntry label="Password" helpText="" placeholder="Password" type="password" />
     <TextEntry label="Disabled" helpText="Help Text (if necessary)" placeholder="some text" isDisabled={true} />
-    <TextEntry label="Error" helpText="Help Text (if necessary)" placeholder="some text" errorHelpText="There is an error" />
+    <TextEntry
+      label="Error"
+      helpText="Help Text (if necessary)"
+      placeholder="some text"
+      errorHelpText="There is an error"
+    />
 
     <h1>Signup Forms</h1>
     <TextEntry label="Normal" helpText="eg. john-smith@abc.com" placeholder="some text" icon={faUser} />

@@ -12,14 +12,12 @@ export class TextEntry extends React.Component {
     }
   }
 
-  handleBlur = () => {
-    this.setState({ isFocused: false })
-  }
+  handleBlur = () => this.setState({ isFocused: false })
 
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { label, placeholder, icon, isDisabled, errorHelpText } = this.props
+    const { label, placeholder, icon, isDisabled, errorHelpText, type } = this.props
     const { isFocused } = this.state
     let { helpText } = this.props
     if (errorHelpText && !isDisabled) helpText = errorHelpText
@@ -64,7 +62,7 @@ export class TextEntry extends React.Component {
             className={inputClassName}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
-            type="text"
+            type={type}
             placeholder={placeholder}
             disabled={isDisabled}
           />
@@ -90,11 +88,10 @@ TextEntry.propTypes = {
   isDisabled: PropTypes.bool,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
 }
 
 TextEntry.defaultProps = {
-  errorHelpText: undefined, // Don't pass '' or it will render an errorHelpText
-  helpText: undefined, // Don't pass '' or it will render a helpText
   isDisabled: false,
-  label: undefined, // Don't pass '' or it will render a label element
+  type: 'text',
 }
