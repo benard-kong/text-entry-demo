@@ -17,7 +17,7 @@ export class TextEntry extends React.Component {
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { errorHelpText, helpText, icon, isDisabled, label, placeholder, type } = this.props
+    const { errorHelpText, handleInputChange, helpText, icon, isDisabled, label, placeholder, type, value } = this.props
     const { isFocused } = this.state
     const statusText = (errorHelpText && !isDisabled ? errorHelpText : helpText) || '.'
     const inputClassName = classNames({
@@ -65,6 +65,8 @@ export class TextEntry extends React.Component {
             type={type}
             placeholder={placeholder}
             disabled={isDisabled}
+            onChange={(e) => handleInputChange(e.target.value)}
+            value={value}
           />
         </div>
         <p data-testid="text-entry-help-text" className={helpTextClassName}>
@@ -77,6 +79,7 @@ export class TextEntry extends React.Component {
 
 TextEntry.propTypes = {
   errorHelpText: PropTypes.string,
+  handleInputChange: PropTypes.func.isRequired,
   helpText: PropTypes.string,
   icon: PropTypes.exact({
     prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
@@ -87,6 +90,7 @@ TextEntry.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
+  value: PropTypes.string.isRequired,
 }
 
 TextEntry.defaultProps = {
