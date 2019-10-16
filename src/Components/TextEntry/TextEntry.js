@@ -17,10 +17,9 @@ export class TextEntry extends React.Component {
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { label, placeholder, icon, isDisabled, errorHelpText, type } = this.props
+    const { errorHelpText, helpText, icon, isDisabled, label, placeholder, type } = this.props
     const { isFocused } = this.state
-    let { helpText } = this.props
-    if (errorHelpText && !isDisabled) helpText = errorHelpText
+    const statusText = (errorHelpText && !isDisabled ? errorHelpText : helpText) || '.'
     const inputClassName = classNames({
       'text-entry__input': true,
       'text-entry__signup': !!icon,
@@ -36,6 +35,7 @@ export class TextEntry extends React.Component {
     })
     const helpTextClassName = classNames({
       'text-entry__help-text': true,
+      'text-entry__help-text--hidden': !helpText && !errorHelpText,
       'text-entry__help-text--error': errorHelpText && !isDisabled,
       'text-entry__help-text--disabled': isDisabled,
     })
@@ -67,11 +67,9 @@ export class TextEntry extends React.Component {
             disabled={isDisabled}
           />
         </div>
-        {helpText && (
-          <p data-testid="text-entry-help-text" className={helpTextClassName}>
-            {helpText}
-          </p>
-        )}
+        <p data-testid="text-entry-help-text" className={helpTextClassName}>
+          {statusText}
+        </p>
       </div>
     )
   }
