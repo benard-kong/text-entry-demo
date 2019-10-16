@@ -9,44 +9,36 @@ export class TextEntry extends React.Component {
 
     this.state = {
       isFocused: false,
-      hasError: false,
-      errorHelpText: undefined,
     }
   }
 
-  handleBlur = (e) => {
+  handleBlur = () => {
     this.setState({ isFocused: false })
-    const { checkError } = this.props
-    if (typeof checkError === 'function') {
-      const input = e.target.value
-      const { hasError, errorHelpText } = checkError(input)
-      this.setState({ hasError, errorHelpText })
-    }
   }
 
   handleFocus = () => this.setState({ isFocused: true })
 
   render() {
-    const { label, placeholder, icon, isDisabled } = this.props
-    const { isFocused, hasError, errorHelpText } = this.state
+    const { label, placeholder, icon, isDisabled, errorHelpText } = this.props
+    const { isFocused } = this.state
     let { helpText } = this.props
-    if (hasError && errorHelpText) helpText = errorHelpText
+    if (errorHelpText && !isDisabled) helpText = errorHelpText
     const inputClassName = classNames({
       'text-entry__input': true,
-      'text-entry__signup': !icon,
+      'text-entry__signup': !!icon,
       'text-entry__input--active': isFocused,
-      'text-entry__input--error': hasError,
+      'text-entry__input--error': errorHelpText && !isDisabled,
       'text-entry__input--disabled': isDisabled,
     })
     const iconClassName = classNames({
       'text-entry__icon-container': true,
       'text-entry__icon-container--active': isFocused,
-      'text-entry__icon-container--error': hasError,
+      'text-entry__icon-container--error': errorHelpText && !isDisabled,
       'text-entry__icon-container--disabled': isDisabled,
     })
     const helpTextClassName = classNames({
       'text-entry__help-text': true,
-      'text-entry__help-text--error': hasError,
+      'text-entry__help-text--error': errorHelpText && !isDisabled,
       'text-entry__help-text--disabled': isDisabled,
     })
     const labelClassName = classNames({
@@ -55,15 +47,20 @@ export class TextEntry extends React.Component {
     })
 
     return (
-      <div data-testid="component-wrapper" className="text-entry">
-        {label && <h3 className={labelClassName}>{label}</h3>}
+      <div className="text-entry">
+        {label && (
+          <h3 data-testid="text-entry-label" className={labelClassName}>
+            {label}
+          </h3>
+        )}
         <div className="text-entry__input-container">
           {icon && (
-            <div className={iconClassName}>
+            <div data-testid="text-entry-icon-container" className={iconClassName}>
               <FontAwesomeIcon icon={icon} />
             </div>
           )}
           <input
+            data-testid="text-entry-input"
             className={inputClassName}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
@@ -72,26 +69,32 @@ export class TextEntry extends React.Component {
             disabled={isDisabled}
           />
         </div>
-        {helpText && <p className={helpTextClassName}>{helpText}</p>}
+        {helpText && (
+          <p data-testid="text-entry-help-text" className={helpTextClassName}>
+            {helpText}
+          </p>
+        )}
       </div>
     )
   }
 }
 
 TextEntry.propTypes = {
-  label: PropTypes.string,
+  errorHelpText: PropTypes.string,
   helpText: PropTypes.string,
-  placeholder: PropTypes.string,
   icon: PropTypes.exact({
     prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
     iconName: PropTypes.string,
     icon: PropTypes.array,
   }),
   isDisabled: PropTypes.bool,
-  checkError: PropTypes.func,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
 }
 
 TextEntry.defaultProps = {
+  errorHelpText: undefined, // Don't pass '' or it will render an errorHelpText
+  helpText: undefined, // Don't pass '' or it will render a helpText
   isDisabled: false,
-  checkError: () => ({ hasError: false }),
+  label: undefined, // Don't pass '' or it will render a label element
 }
