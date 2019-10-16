@@ -3,9 +3,8 @@ import { TextEntry } from './TextEntry'
 import { shallow } from 'enzyme' // helps us render components to visual DOM
 import { findByTestAttr } from '../../tests/utils/findByTestAttr'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import classes from '*.module.sass'
 
-describe('TextEntry Tests', () => {
+describe('TextEntry Unit Tests', () => {
   describe('Default values: No props provided', () => {
     let wrapper, inputComponent
     beforeEach(() => {
@@ -200,7 +199,7 @@ describe('TextEntry Tests', () => {
     test("input element's placeholder attribute should no longer be undefined", () => {
       const wrapper = shallow(<TextEntry placeholder="placeholder text" />)
       const inputComponent = findByTestAttr(wrapper, 'text-entry-input')
-      expect(inputComponent.prop('placeholder')).not.toEqual(undefined)
+      expect(inputComponent.prop('placeholder')).toBeDefined()
     })
 
     test("input element's placeholder attribute should equal the text given to it", () => {
@@ -251,7 +250,6 @@ describe('TextEntry Tests', () => {
         inputComponentBeforeFocus.prop('onFocus')()
         wrapper.update()
         const inputComponentAfterFocus = findByTestAttr(wrapper, 'text-entry-input')
-        const iconComponentAfterFocus = findByTestAttr(wrapper, 'text-entry-icon-container')
         inputComponentAfterFocus.prop('onBlur')()
         wrapper.update()
         const inputComponentAfterBlur = findByTestAttr(wrapper, 'text-entry-input')
