@@ -11,21 +11,23 @@ ReactDOM.render(
     <h1>General Forms</h1>
     <TextEntry label="Normal" helpText="Help Text (if necessary)" placeholder="some text" />
     <TextEntry label="Disabled" helpText="Help Text (if necessary)" placeholder="some text" isDisabled={true} />
+    <TextEntry label="Error" helpText="Help Text (if necessary)" placeholder="some text" errorHelpText="There is an error" />
 
     <h1>Signup Forms</h1>
-    <TextEntry
-      label="Email"
-      helpText="eg. john-smith@abc.com"
-      placeholder="some text"
-      icon={faUser}
-      checkError={emailHasError}
-    />
+    <TextEntry label="Normal" helpText="eg. john-smith@abc.com" placeholder="some text" icon={faUser} />
     <TextEntry
       label="Disabled"
       helpText="Help Text (if necessary)"
       placeholder="some text"
       icon={faUser}
       isDisabled={true}
+    />
+    <TextEntry
+      label="Error"
+      helpText="Help Text (if necessary)"
+      placeholder="some text"
+      icon={faUser}
+      errorHelpText="There is an Error"
     />
   </div>,
   document.getElementById('root')
