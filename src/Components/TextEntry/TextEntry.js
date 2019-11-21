@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 
 export class TextEntry extends React.Component {
@@ -12,7 +11,10 @@ export class TextEntry extends React.Component {
     }
   }
 
-  handleBlur = () => this.setState({ isFocused: false })
+  handleBlur = () => {
+    this.setState({ isFocused: false })
+    if (this.props.onBlur) this.props.onBlur()
+  }
 
   handleFocus = () => this.setState({ isFocused: true })
 
@@ -52,9 +54,14 @@ export class TextEntry extends React.Component {
           </h3>
         )}
         <div className="text-entry__input-container">
-          {icon && (
+          {/* {icon && (
             <div data-testid="text-entry-icon-container" className={iconClassName}>
               <FontAwesomeIcon icon={icon} />
+            </div>
+          )} */}
+          {icon && (
+            <div data-testid="text-entry-icon-container" className={iconClassName}>
+              <i className="material-icons">{icon}</i>
             </div>
           )}
           <input
@@ -81,11 +88,12 @@ TextEntry.propTypes = {
   errorHelpText: PropTypes.string,
   handleInputChange: PropTypes.func.isRequired,
   helpText: PropTypes.string,
-  icon: PropTypes.exact({
-    prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
-    iconName: PropTypes.string,
-    icon: PropTypes.array,
-  }),
+  // icon: PropTypes.exact({
+  //   prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
+  //   iconName: PropTypes.string,
+  //   icon: PropTypes.array,
+  // }),
+  icon: PropTypes.string,
   isDisabled: PropTypes.bool,
   label: PropTypes.string,
   placeholder: PropTypes.string,
