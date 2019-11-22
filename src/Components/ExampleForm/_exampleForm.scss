@@ -1,0 +1,39 @@
+.example-form {
+  &__title {
+    font-size: 4rem;
+    text-align: center;
+  }
+
+  &__instruction-flex-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__instructions-container {
+    max-width: 80rem;
+  }
+
+  &__instruction {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 4rem;
+  }
+
+  &__todo-list-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__todo-item {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  &__text-entry {
+    padding: 0 2rem;
+
+    &:not(:last-of-type) {
+      margin-bottom: 1.5rem;
+    }
+  }
+}

@@ -16,12 +16,16 @@ export class TextEntry extends React.Component {
     if (this.props.onBlur) this.props.onBlur()
   }
 
-  handleFocus = () => this.setState({ isFocused: true })
+  handleFocus = () => {
+    this.setState({ isFocused: true })
+    if (this.props.onFocus) this.props.onFocus()
+  }
 
   render() {
     const { errorHelpText, handleInputChange, helpText, icon, isDisabled, label, placeholder, type, value } = this.props
     const { isFocused } = this.state
     const statusText = (errorHelpText && !isDisabled ? errorHelpText : helpText) || '.'
+    const componentClassName = classNames('text-entry', this.props.className)
     const inputClassName = classNames({
       'text-entry__input': true,
       'text-entry__signup': !!icon,
@@ -47,7 +51,7 @@ export class TextEntry extends React.Component {
     })
 
     return (
-      <div className="text-entry">
+      <div className={componentClassName}>
         {label && (
           <h3 data-testid="text-entry-label" className={labelClassName}>
             {label}
