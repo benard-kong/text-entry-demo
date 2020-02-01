@@ -27,6 +27,22 @@
     top: 1.3rem;
     position: absolute;
     visibility: hidden;
+
+    &--never-hidden {
+      color: $color-grey-1;
+      font-size: 1.2rem;
+      padding: 0 5px;
+      transform: translate(0, -1.6rem);
+      visibility: visible;
+    }
+
+    &--active {
+      color: $color-secondary;
+    }
+
+    &--error {
+      color: $color-error;
+    }
   }
 
   &:focus-within &__placeholder-text-above {
@@ -34,8 +50,15 @@
     font-size: 1.2rem;
     padding: 0 5px;
     transform: translate(0, -1.6rem);
-    transition: linear 0.1s;
     visibility: visible;
+
+    &--error {
+      color: $color-error;
+    }
+  }
+
+  &:focus-within &__placeholder-text-above--hidden {
+    transition: linear 0.1s;
 
     &--error {
       color: $color-error;

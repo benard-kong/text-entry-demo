@@ -51,6 +51,8 @@ export class TextEntry extends React.Component {
     })
     const placeholderAboveClassName = classNames('text-entry__placeholder-text-above', {
       'text-entry__placeholder-text-above--error': errorHelpText && !isDisabled,
+      'text-entry__placeholder-text-above--never-hidden': value,
+      'text-entry__placeholder-text-above--hidden': !value,
     })
 
     return (
