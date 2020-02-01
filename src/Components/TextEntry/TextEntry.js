@@ -49,6 +49,9 @@ export class TextEntry extends React.Component {
       'text-entry__label': true,
       'text-entry__label--disabled': isDisabled,
     })
+    const placeholderAboveClassName = classNames('text-entry__placeholder-text-above', {
+      'text-entry__placeholder-text-above--error': errorHelpText && !isDisabled,
+    })
 
     return (
       <div className={componentClassName}>
@@ -58,11 +61,7 @@ export class TextEntry extends React.Component {
           </h3>
         )}
         <div className="text-entry__input-container">
-          {/* {icon && (
-            <div data-testid="text-entry-icon-container" className={iconClassName}>
-              <FontAwesomeIcon icon={icon} />
-            </div>
-          )} */}
+          <p className={placeholderAboveClassName}>{placeholder}</p>
           {icon && (
             <div data-testid="text-entry-icon-container" className={iconClassName}>
               <i className="material-icons">{icon}</i>
@@ -92,11 +91,6 @@ TextEntry.propTypes = {
   errorHelpText: PropTypes.string,
   handleInputChange: PropTypes.func.isRequired,
   helpText: PropTypes.string,
-  // icon: PropTypes.exact({
-  //   prefix: PropTypes.oneOf(['fas', 'fab', 'far', 'fal', 'fad']),
-  //   iconName: PropTypes.string,
-  //   icon: PropTypes.array,
-  // }),
   icon: PropTypes.string,
   isDisabled: PropTypes.bool,
   label: PropTypes.string,
