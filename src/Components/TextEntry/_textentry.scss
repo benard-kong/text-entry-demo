@@ -21,7 +21,6 @@
 
   &__placeholder-text-above {
     background-color: #fff;
-
     font-size: 2rem;
     left: 9.1rem;
     top: 1.3rem;
@@ -42,6 +41,11 @@
 
     &--error {
       color: $color-error;
+    }
+
+    &--hidden {
+      color: $color-grey-1;
+      transition: font-size 0.1s linear, transform 0.1s linear, visibility 0.1s linear;
     }
   }
 
@@ -117,9 +121,19 @@
       color: $color-grey-1;
     }
 
+    &::placeholder {
+      color: $color-grey-1;
+    }
+
     &:focus::placeholder {
       color: transparent;
+      visibility: hidden;
     }
+  }
+
+  &__placeholder-text-above--hidden ~ &__input::placeholder {
+    transition: color 0.1s linear;
+    transition-delay: 0.1s;
   }
 
   &__signup {
